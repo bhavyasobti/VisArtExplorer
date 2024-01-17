@@ -1,1 +1,1 @@
-#VisArt Explorer Website Project
+# VisArt Explorer Website Project
