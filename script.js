@@ -6,17 +6,8 @@ document.addEventListener('DOMContentLoaded', function(){
                   .attr('width', width)
                   .attr('height', height);
 
-    // Define the dataset (this will usually be loaded externally)
-    const artistsData = {
-        nodes: [
-            // Sample nodes: { id: "Artist Name", group: 1 }
-        ],
-        links: [
-            // Sample links: { source: "Artist Name", target: "Artwork Name" }
-        ]
-    };
-
-    // Create the network graph using D3.js here
+    
+    
 
     // Function to draw the network graph
     function drawGraph(data) {

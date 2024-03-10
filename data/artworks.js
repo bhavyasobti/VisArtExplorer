@@ -273,7 +273,7 @@ var all_artworks = [
 
 
 
-
+//GALLERY GRID
 
 document.addEventListener('DOMContentLoaded', function() {
         // Function to create image elements and append to the container
@@ -298,6 +298,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         }
+
+//STORY CARDS
     
         function showStoryCard(artwork) {
             var storyCard = document.getElementById('story-card');
@@ -343,6 +345,49 @@ document.addEventListener('DOMContentLoaded', function() {
     
         createArtworkGrid(); // Call to create the grid
     });
+
+
+    //NETWORK DATA
+
+    function prepareNetworkData(artworks) {
+        let nodes = [];
+        let links = [];
+        let artistSet = new Set();
+    
+        artworks.forEach(artwork => {
+            // Add artwork node
+            nodes.push({ 
+                id: artwork.title, 
+                type: 'artwork', 
+                image: artwork.image, 
+                year: artwork.year,
+                genre: artwork.type,
+                details: artwork // includes all artwork details for story card
+            });
+    
+            // Split authors and create nodes and links
+            const authors = artwork.author.split(', ');
+            authors.forEach(author => {
+                if (!artistSet.has(author)) {
+                    nodes.push({ 
+                        id: author, 
+                        type: 'artist' 
+                    });
+                    artistSet.add(author);
+                }
+    
+                // Add link between artwork and each author
+                links.push({ 
+                    source: artwork.title, 
+                    target: author
+                });
+            });
+        });
+    
+        return { nodes, links };
+    }
+    
+    var networkData = prepareNetworkData(all_artworks);
 
 
 
