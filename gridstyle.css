@@ -30,7 +30,7 @@ a.nav-link :hover {
 .nav-link{
     position: relative;
     transition: all 0.3s ease-out;
-    margin-bottom: 1em;
+    margin-bottom:auto;
     display: block;
     color: #ff908b;
     

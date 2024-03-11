@@ -1,3 +1,26 @@
-.graph {
-    margin-top: 10%;
+#graph{
 }
+
+#networkGraph {
+    display:block;
+    margin:auto;
+}
+
+g.node.highlighted, g.link.highlighted {
+    stroke: #ff908b;
+    stroke-width: 3px;
+}
+
+#story-card {
+    position: absolute;
+    right: 0;
+    background-color: whitesmoke;
+    width: 400px; 
+    padding: 20px;
+    overflow-y: auto; 
+    display: none; /* Hidden by default */
+    z-index: 1020; /* Above other elements */
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+}
+
+

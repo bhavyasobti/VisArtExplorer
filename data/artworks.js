@@ -51,9 +51,6 @@ var all_artworks = [
     {"image": "./data/36.jpg", "type": "artwork", "year": "2021", "theme": "dis/connected", "author": "Baltazar Pérez, Ilana Levin", "title": "Spectrographies: Decomposition of Music into Light", "abstract": "Since designing cover art for music albums was pioneered by Alex Steinweiss by the end of the 30’s, music has become inextricably associated with the artwork that serves as its medium. Music distribution was forever changed and his designs went on to inspire future covers such as Pink Floyd’s Dark Side. Now that music distribution has turned mostly digital, transitioning to the new “radio” format of streaming, the image artwork has lost part of the importance it had to make people identify and connect to music in the vinyl and CD eras.\n" +
             "\n" +
             "Spectrographies: Decompositions of Music into Light started out as an aesthetic experiment to remix famous album covers by digitally fusing sound and artwork and developed into a new way to represent and embody music, leading to a reinterpretation of the concept of cover art and physical album in the digital distribution age of music. The project works through a semiautomated process which transforms an album into a graphical edition made from its own tracks which, as photographs in a photo album, can be independently collected. A pictographic legend inspired by the Voyager Golden Record accompanies the enveloped edition of a full LP.", "link": "https://visap.net/2021/gallery/"},
-    {"image": "./data/37.jpg", "type": "artwork", "year": "2021", "theme": "dis/connected", "author": "Jiabao Li", "title": "Glacier's Lament", "abstract": "Glaciers are sentinels of climate change. They are the most visible evidence of global warming today. This series of works embodies the stunning beauty, rapid change, fragility, destructive power, and magnificence of glaciers. At the same time, they challenge the audience with the dramatic, irreversible ecological damages from climate change.\n" +
-            "\n" +
-            "There are four color cards in PANTONE for glacier blue. However, in real glaciers, this blue color is variable and dynamic. As glaciers are disappearing, this unique blue is also disappearing. We sampled and blended the blue color from glaciers in Alaska and hung them in recycled glass vials. When one glacier calving happened, one color vial fell down. At the end of the exhibition, all 60 vials fell down, forming a painting on the canvas beneath.", "link": "https://visap.net/2021/gallery/"},
     {"image": "./data/38.jpg", "type": "artwork", "year": "2021", "theme": "dis/connected", "author": "Emily Fuhrman", "title": "Side-view States", "abstract": "On maps of the United States, state boundaries enclose flat polygons, independent of the ground beneath. Viewed from above, the borders between state territories differently follow natural barriers, approximate the juncture of a grid, and mark the edges of the land that abuts the ocean. The lines that define them trace two-dimensional outlines not subject to the vagaries of terrain, representing instead the legal and subsequent cultural definitions of where one territory ends and another begins.\n" +
             "\n" +
             "The traveler between U.S. states tends to experience state borders as points, not lines, encountered at the point of intersection: hearing a programmed welcome announcement through a personal GPS system when crossing from New York to New Jersey, for instance; standing in Cincinnati, looking across the Ohio River to Kentucky; or seeing a \"Welcome to California\" sign when crossing the Oregon border by car. During the COVID-19 pandemic, the concept of statehood became fragile, almost ridiculous, in contrast to the hyper-localized geography to which so many confined themselves for safety. State boundaries, already an abstract concept, served primarily as grouping methods for daily statistics detailing the presence and progression of the virus.", "link": "https://visap.net/2021/gallery/"},
@@ -273,14 +270,69 @@ var all_artworks = [
 
 
 
+
+
+
+
+//STORY CARDS
+    
+function showStoryCard(artwork) {
+        var storyCard = document.getElementById('story-card');
+        storyCard.innerHTML = ''; 
+
+        // Close 
+        var closeButton = document.createElement('button');
+        closeButton.textContent = 'X'; 
+        closeButton.onclick = function() {
+            storyCard.style.display = 'none'; 
+        };
+        closeButton.classList.add('close-button');
+
+        var img = document.createElement('img');
+        img.src = artwork.image;
+        img.style.width = '100%'; 
+    
+        var titleLink = document.createElement('a');
+        titleLink.href = artwork.link; 
+        titleLink.textContent = artwork.title;
+        titleLink.target = '_blank'; 
+    
+        var author = document.createElement('p');
+        author.textContent = artwork.author;
+
+        var year = document.createElement('p');
+        year.textContent = artwork.year;
+    
+        var theme = document.createElement('p');
+        theme.textContent = 'Theme: ' + artwork.theme;
+    
+        var abstract = document.createElement('p');
+        abstract.textContent = artwork.abstract;
+    
+        
+        storyCard.appendChild(closeButton);
+        storyCard.appendChild(img);
+        storyCard.appendChild(titleLink);
+        storyCard.appendChild(author);
+        storyCard.appendChild(year);
+        storyCard.appendChild(theme);
+        storyCard.appendChild(abstract);
+       
+    
+        storyCard.style.display = 'block';
+    }
+
+    window.showStoryCard = showStoryCard;
+
+
 //GALLERY GRID
 
 document.addEventListener('DOMContentLoaded', function() {
-        // Function to create image elements and append to the container
+        
         function createArtworkGrid() {
-            const groupedArtworks = all_artworks.reduce((acc, artwork) => {
-                acc[artwork.year] = [...(acc[artwork.year] || []), artwork];
-                return acc;
+            const groupedArtworks = all_artworks.reduce((accumulator, artwork) => {
+                accumulator[artwork.year] = [...(accumulator[artwork.year] || []), artwork];
+                return accumulator;
             }, {});
     
             for (const [year, artworks] of Object.entries(groupedArtworks)) {
@@ -291,7 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     img.alt = artwork.title;
                     container.appendChild(img);
     
-                    // Attach click event to each image
                     img.addEventListener('click', function() {
                         showStoryCard(artwork);
                     });
@@ -299,51 +350,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-//STORY CARDS
-    
-        function showStoryCard(artwork) {
-            var storyCard = document.getElementById('story-card');
-            storyCard.innerHTML = ''; // Clear previous content
-    
-            // Close button
-            var closeButton = document.createElement('button');
-            closeButton.textContent = 'X'; // Text for the button
-            closeButton.onclick = function() {
-                storyCard.style.display = 'none'; // Hide the story card when clicked
-            };
-            closeButton.classList.add('close-button');
 
-            var img = document.createElement('img');
-            img.src = artwork.image;
-            img.style.width = '100%'; // Make image responsive
-        
-            var titleLink = document.createElement('a');
-            titleLink.href = artwork.link; 
-            titleLink.textContent = artwork.title;
-            titleLink.target = '_blank'; 
-        
-            var author = document.createElement('p');
-            author.textContent = artwork.author;
-        
-            var theme = document.createElement('p');
-            theme.textContent = 'Theme: ' + artwork.theme;
-        
-            var abstract = document.createElement('p');
-            abstract.textContent = artwork.abstract;
-        
-            
-            storyCard.appendChild(closeButton);
-            storyCard.appendChild(img);
-            storyCard.appendChild(titleLink);
-            storyCard.appendChild(author);
-            storyCard.appendChild(theme);
-            storyCard.appendChild(abstract);
-           
-        
-            storyCard.style.display = 'block';
-        }
-    
-        createArtworkGrid(); // Call to create the grid
+    if (document.getElementById("grid-sections")) {
+        createArtworkGrid(); 
+    }
     });
 
 
@@ -355,18 +365,24 @@ document.addEventListener('DOMContentLoaded', function() {
         let artistSet = new Set();
     
         artworks.forEach(artwork => {
-            // Add artwork node
+            
             nodes.push({ 
                 id: artwork.title, 
                 type: 'artwork', 
                 image: artwork.image, 
                 year: artwork.year,
                 genre: artwork.type,
-                details: artwork // includes all artwork details for story card
+                details: artwork 
             });
     
-            // Split authors and create nodes and links
-            const authors = artwork.author.split(', ');
+            
+            let authors = artwork.author.trim();
+            if (authors.includes(', ')) {
+                authors = authors.split(', ');
+            } else {
+                authors = [authors]; 
+            }
+
             authors.forEach(author => {
                 if (!artistSet.has(author)) {
                     nodes.push({ 
@@ -376,7 +392,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     artistSet.add(author);
                 }
     
-                // Add link between artwork and each author
+               
                 links.push({ 
                     source: artwork.title, 
                     target: author
@@ -392,3 +408,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+//BARCHART
+
+let yearCounts = {};
+all_artworks.forEach(artwork => {
+    if (yearCounts[artwork.year]) {
+        yearCounts[artwork.year]++;
+    } else {
+        yearCounts[artwork.year] = 1;
+    }
+});
+
+let barChartData = Object.keys(yearCounts).map(year => {
+    return { year: year, count: yearCounts[year] };
+});
