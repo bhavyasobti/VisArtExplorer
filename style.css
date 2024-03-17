@@ -63,7 +63,7 @@
     margin-top: 20px;
   }
   .content-box {
-    flex: 1; /* boxes equal width */
+    flex: 1; 
     padding: 20px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: 0 10px; 
@@ -92,13 +92,13 @@
     background-color: whitesmoke;
     top: 80px; 
     height: calc(100vh - 80px);
-    width: 500px; /* Adjust width as needed */
+    width: 40%; 
     padding: 20px;
-    overflow-y: auto; /* Enable scrolling */
-    display: none; /* Hidden by default */
-    z-index: 1000; /* Above other elements */
-    float: right; /* Align to the right */
-    margin-left: auto; /* Additional alignment to the right */
+    overflow-y: auto; 
+    display: none; 
+    z-index: 1000; 
+    float: right; 
+    margin-left: auto; 
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
 }
 

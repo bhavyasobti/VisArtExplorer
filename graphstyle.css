@@ -3,7 +3,8 @@
 
 #networkGraph {
     display:block;
-    margin:auto;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 g.node.highlighted, g.link.highlighted {
@@ -15,12 +16,35 @@ g.node.highlighted, g.link.highlighted {
     position: absolute;
     right: 0;
     background-color: whitesmoke;
-    width: 400px; 
+    width: 25%; 
     padding: 20px;
     overflow-y: auto; 
-    display: none; /* Hidden by default */
-    z-index: 1020; /* Above other elements */
+    display: none; 
+    z-index: 1020; 
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
 }
 
+#barChart {
+    position: absolute;
+    top: 80px; 
+    height: calc(100vh - 80px);
+    left: 0;
+    background-color: whitesmoke;
+    width: 25%; 
+    padding: 20px;
+    margin-right: auto;
+    z-index: 1020; 
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    order: 1;
+}
+
+#legend{
+    position: absolute;
+    left: 20px;
+    top: 75vh;
+    z-index: 1030;
+    width: 25%;
+    padding: 25px;
+    order: 2;
+}
 

@@ -102,6 +102,11 @@ a.nav-link.active .nav__body{
     height: 250px;
     opacity: 1;
     overflow: visible;
+    pointer-events: all;
+}
+
+a.nav-link.active .nav__body:hover{
+    text-decoration: underline;
 }
 
 
@@ -124,10 +129,10 @@ section {
     width: 100%;
     margin: 10px;
     height:fit-content;
-    break-inside: avoid-column; /* This helps to prevent images from being split between columns */
+    break-inside: avoid-column; 
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 1200px) {
     .artwork-container {
         column-count: 4;

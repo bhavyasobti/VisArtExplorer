@@ -45,72 +45,73 @@
                   <a class="nav-link" href="#item-1">
 
                     <span class="nav__counter">2022</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Mingling Spaces</h3>
+                    <p class="nav__body" data-url="https://visap.net/2022">VISAP '22</p>
 
                   </a>
 
                   <a class="nav-link" href="#item-2">
 
                     <span class="nav__counter">2021</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Disconnected</h3>
+                    <p class="nav__body" data-url="https://visap.net/2021/">VISAP '21</p>
 
                   </a>
 
+                  
                   <a class="nav-link" href="#item-3">
                     <span class="nav__counter">2020</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
-
+                    <h3 class="nav__title">Enchantment</h3> 
+                    <p class="nav__body" data-url="https://visap.net/2020/"> VISAP '20</p>
                   </a>
+
 
                   <a class="nav-link" href="#item-4">
                     <span class="nav__counter">2019</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Beyond Borders</h3>
+                    <p class="nav__body" data-url="https://visap.net/2019/">VISAP '19</p>
 
                   </a>
 
                   <a class="nav-link" href="#item-5">
                     <span class="nav__counter">2018</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Data and Identities</h3>
+                    <p class="nav__body" data-url="https://visap.net/2018/">VISAP '18</p>
 
                   </a>
 
                   <a class="nav-link" href="#item-6">
                     <span class="nav__counter">2017</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Sustain and Decay</h3>
+                    <p class="nav__body" data-url="http://visap.uic.edu/2017/">VISAP '17</p>
 
                   </a>
 
                   <a class="nav-link" href="#item-7">
                     <span class="nav__counter">2016</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Metamorphoses</h3>
+                    <p class="nav__body" data-url="http://visap.uic.edu/2016/">VISAP '16</p>
 
                   </a>
 
                   <a class="nav-link" href="#item-8">
                     <span class="nav__counter">2015</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Data Improvisations</h3>
+                    <p class="nav__body" data-url="http://visap.uic.edu/2015/">VISAP '15</p>
 
                   </a>
 
                   <a class="nav-link" href="#item-9">
                     <span class="nav__counter">2014</span>
-                    <h3 class="nav__title">Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title">Art+Interpretation</h3>
+                    <p class="nav__body" data-url="http://visap.uic.edu/2014/">VISAP '14</p>
 
                   </a>
 
                   <a class="nav-link" href="#item-10">
                     <span class="nav__counter">2013</span>
-                    <h3 class="nav__title"> Theme</h3>
-                    <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
+                    <h3 class="nav__title"> Art+Experiment</h3>
+                    <p class="nav__body" data-url="http://visap.uic.edu/2013/">VISAP '13</p>
 
                   </a>
                   
@@ -182,6 +183,17 @@
         
 
            <!-- SCRIPTS --> 
+
+           <script>
+                    document.querySelectorAll('.nav__body').forEach(item => {
+                      item.addEventListener('click', event => {
+                          const url = event.target.getAttribute('data-url');
+                          if (url) {
+                              window.open(url, '_blank'); 
+                          }
+                      });
+                  });
+           </script>
 
 
               <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

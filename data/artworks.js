@@ -305,6 +305,9 @@ function showStoryCard(artwork) {
     
         var theme = document.createElement('p');
         theme.textContent = 'Theme: ' + artwork.theme;
+
+        var type = document.createElement('p');
+        theme.textContent = 'Type: ' + artwork.type;
     
         var abstract = document.createElement('p');
         abstract.textContent = artwork.abstract;
@@ -410,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //BARCHART
 
-let yearCounts = {};
+/* let yearCounts = {};
 all_artworks.forEach(artwork => {
     if (yearCounts[artwork.year]) {
         yearCounts[artwork.year]++;
@@ -421,4 +424,24 @@ all_artworks.forEach(artwork => {
 
 let barChartData = Object.keys(yearCounts).map(year => {
     return { year: year, count: yearCounts[year] };
+}); */
+
+let yearTypesCount = {};
+all_artworks.forEach(artwork => {
+    if (!yearTypesCount[artwork.year]) {
+        yearTypesCount[artwork.year] = {};
+    }
+    if (!yearTypesCount[artwork.year][artwork.type]) {
+        yearTypesCount[artwork.year][artwork.type] = 0;
+    }
+    yearTypesCount[artwork.year][artwork.type]++;
+});
+
+let barChartData = Object.keys(yearTypesCount).map(year => {
+    return { 
+        year: year, 
+        types: Object.keys(yearTypesCount[year]).map(type => {
+            return { type: type, count: yearTypesCount[year][type] };
+        })
+    };
 });
