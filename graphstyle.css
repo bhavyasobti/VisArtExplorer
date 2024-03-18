@@ -20,7 +20,7 @@ g.node.highlighted, g.link.highlighted {
     padding: 20px;
     overflow-y: auto; 
     display: none; 
-    z-index: 1020; 
+    z-index: 1030; 
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
 }
 
@@ -46,5 +46,20 @@ g.node.highlighted, g.link.highlighted {
     width: 25%;
     padding: 25px;
     order: 2;
+}
+
+#author-list{
+    position: absolute;
+    right: 0;
+    top:80px;
+    height: calc(100vh - 80px);
+    background-color: whitesmoke;
+    width: 20%; 
+    padding: 20px;
+    overflow-y: auto;  
+    z-index: 1020; 
+    float: right;
+    margin-left:auto;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
 }
 
