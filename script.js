@@ -80,7 +80,10 @@ document.addEventListener('DOMContentLoaded', function(){
         .attr("x", -artworkRadius)
         .attr("y", -artworkRadius)
         .attr("width", artworkRadius * 2)
-        .attr("height", artworkRadius * 2);
+        .attr("height", artworkRadius * 2)
+        .on("mouseover", showImageTooltip)
+        .on("mousemove", showImageTooltip)
+        .on("mouseout", hideImageTooltip);
     
 // ARTISTS
     node.filter(d => d.type === 'artist')
@@ -227,7 +230,10 @@ document.addEventListener('DOMContentLoaded', function(){
                 return currentX;
             })
             .attr("width", d => x(d.count))
-            .attr("fill", d => color(d.type))  
+            .attr("fill", d => color(d.type))
+            .on("mouseover", showBarTooltip)
+            .on("mousemove", showBarTooltip)
+            .on("mouseout", hideBarTooltip) 
             .on("click", function(event, d) {
             highlightYear(d.year);
             });
@@ -396,8 +402,8 @@ function isConnectedtoAuthor(d, selectedAuthor){
 
 //TOOLTIPS
 
-var tooltip = d3.select("#tooltip");
-
+//tooltips for authors
+var tooltip = d3.select("#authortooltip");
 function showTooltip(event, d) {
     tooltip.style("opacity", 1)
            .html("Name: " + d.id + "<br>Contributions: " + (authorCount[d.id] || 0))
@@ -413,5 +419,35 @@ node.filter(d => d.type === 'artist')
     .on("mouseover", showTooltip)
     .on("mousemove", showTooltip)
     .on("mouseout", hideTooltip);
+
+
+//tooltips for images
+var imageTooltip = d3.select("#imagetooltip");
+function showImageTooltip(event, d) {
+    imageTooltip.html(d.id) 
+        .style("opacity", 1)
+        .style("left", (event.pageX + 10) + "px")
+        .style("top", (event.pageY + 10) + "px");
+}
+
+function hideImageTooltip() {
+    imageTooltip.style("opacity", 0);
+}
+
+
+//tooltips for barchart
+var barTooltip = d3.select("#bartooltip");
+function showBarTooltip(event, d) {
+    barTooltip.style("opacity", 1)
+              .html(`Year: ${d.year}<br>Type: ${d.type}<br>Count: ${d.count}`)
+              .style("left", (event.pageX + 10) + "px")
+              .style("top", (event.pageY + 10) + "px");
+}
+
+function hideBarTooltip() {
+    barTooltip.style("opacity", 0);
+}
+
+
 
 });
