@@ -85,12 +85,13 @@ document.addEventListener('DOMContentLoaded', function(){
 // ARTISTS
     node.filter(d => d.type === 'artist')
         .append("circle")
-        .attr("r", artistRadius);
-
-    
+        .attr("r", artistRadius)
+        .attr('class', 'artist')
+        .style('outline', 'none');
+        
 // TITLE
-    node.append("title")
-        .text(d => d.id);     
+ //   node.append("title")
+ //       .text(d => d.id);     
     
 //TICKS
     function ticked() {
@@ -120,12 +121,24 @@ document.addEventListener('DOMContentLoaded', function(){
                 authorElem.style.fontWeight = "bold";
                 authorElem.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
                 }
+
+                node.selectAll('circle')
+                .transition()
+                .duration(200)
+                .attr("r", (nodeData => {
+                    if(nodeData === d){return 10;}
+                    else{
+                    return networkData.links.some(link => (link.source === d && link.target === nodeData) ||(link.target === d && link.source === nodeData)) 
+                        ?10:5;
+                        }
+        }));
             
             node.style("opacity", nodeData => {
                 return networkData.links.some(link => 
                     (link.source === d && link.target === nodeData) ||
                     (link.target === d && link.source === nodeData)
                 ) ? 1 : 0.5;});
+
 
         link.style("stroke-opacity", 0.1)
         .style("stroke-width", "2px");
@@ -142,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function(){
         if (d.type === 'artwork') {
             window.showStoryCard(d.details);
         }
+
     });
 
     svg.on("click", () => {
@@ -152,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function(){
     function resetHighlights() {
       node.style("fill", "#000");
       node.style("opacity", "1");
+      node.selectAll('circle').attr('r', artistRadius);
       link.attr("display","block");
       link.style("stroke-opacity", 0.6) 
           .style("stroke-width", "2px")
@@ -265,6 +280,18 @@ document.addEventListener('DOMContentLoaded', function(){
         
     });
 
+    node.selectAll('circle')
+                .transition()
+                .duration(200)
+                .attr("r", (d => {
+                    const isConnectedToHighlightedArtwork = networkData.links.some(link => 
+                        (currentArtworks.has(link.source) && link.target === d) ||
+                        (currentArtworks.has(link.target) && link.source === d));
+                        return isConnectedToHighlightedArtwork ? 10 : 5;
+                        
+        }));
+
+
     node.style("fill", d=>{
         const isConnectedToHighlightedArtwork = networkData.links.some(link => 
         (currentArtworks.has(link.source) && link.target === d) ||
@@ -322,7 +349,8 @@ function highlightAuthor(selectedAuthor){
     }
               
     node.style("fill", d => {
-            return (d.type==='artist' && d.id==selectedAuthor) ? "#ff908b" : "#808080"; }); 
+            return (d.type==='artist' && d.id === selectedAuthor) ? "#ff908b" : "#808080"; });
+            
             
     node.style("opacity", d => {
         if (d.type === 'artist' && d.id === selectedAuthor) {
@@ -341,6 +369,22 @@ function highlightAuthor(selectedAuthor){
         .style("stroke-opacity", 1)
         .style("stroke-width", "3px")
         .style("stroke", function(d){ return "#ff908b"});
+
+        node.selectAll('circle').each(function(d) {
+            if (d.type === 'artist') {
+                if (d.id === selectedAuthor) {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr('r', 10); 
+                } else {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr('r', 5); 
+                }
+            }
+        });
 }
 
 function isConnectedtoAuthor(d, selectedAuthor){
@@ -350,5 +394,24 @@ function isConnectedtoAuthor(d, selectedAuthor){
         return isConnected;
 }
 
+//TOOLTIPS
+
+var tooltip = d3.select("#tooltip");
+
+function showTooltip(event, d) {
+    tooltip.style("opacity", 1)
+           .html("Name: " + d.id + "<br>Contributions: " + (authorCount[d.id] || 0))
+           .style("left", (event.pageX + 10) + "px")
+           .style("top", (event.pageY + 10) + "px");
+}
+
+function hideTooltip() {
+    tooltip.style("opacity", 0);
+}
+
+node.filter(d => d.type === 'artist')
+    .on("mouseover", showTooltip)
+    .on("mousemove", showTooltip)
+    .on("mouseout", hideTooltip);
 
 });
