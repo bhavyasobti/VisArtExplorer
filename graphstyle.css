@@ -54,7 +54,7 @@ g.node.highlighted, g.link.highlighted {
     top:80px;
     height: calc(100vh - 80px);
     background-color: whitesmoke;
-    width: 20%; 
+    width: 15%; 
     padding: 20px;
     overflow-y: auto;  
     z-index: 1020; 
@@ -63,11 +63,4 @@ g.node.highlighted, g.link.highlighted {
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
 }
 
-.tooltip {
-    background-color: #ff908b;
-    color: white;
-    font-size: x-small;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
-}
+

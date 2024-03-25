@@ -271,9 +271,6 @@ var all_artworks = [
 
 
 
-
-
-
 //STORY CARDS
     
 function showStoryCard(artwork) {
