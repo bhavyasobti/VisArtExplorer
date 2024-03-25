@@ -63,4 +63,13 @@ g.node.highlighted, g.link.highlighted {
     box-shadow: -5px 0 15px rgba(0,0,0,0.3);
 }
 
+/*TOOLTIPS*/
 
+.tooltip {
+    background-color: #ff908b;
+    color: white;
+    font-size: x-small;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+  }
