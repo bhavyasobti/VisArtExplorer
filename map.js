@@ -39,4 +39,24 @@ theme_data.forEach(theme => {
     });
     circle.addTo(map);
 });
+
+var columns = [
+    document.getElementById('year-links-column-1'),
+    document.getElementById('year-links-column-2'),
+    document.getElementById('year-links-column-3'),
+    document.getElementById('year-links-column-4')
+];
+
+theme_data.forEach(function(item, index) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = item.Link;
+    a.textContent = item.Year;
+    li.appendChild(a);
+
+    
+    var columnIndex = index % 4;
+    columns[columnIndex].appendChild(li);
+});
+
 });
