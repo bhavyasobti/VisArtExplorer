@@ -23,6 +23,7 @@ theme_data.forEach(theme => {
     let year = theme.Year;
     let contributions = contributionCounts[year] || 0;
     let yearUrl = theme.Link;
+    let chairs = theme["General Chairs"];
 
     var circle = L.circleMarker(coords, {
         radius: contributions / 1.4 ,
@@ -33,7 +34,7 @@ theme_data.forEach(theme => {
         fillOpacity: 0.8
     });
 
-    circle.bindTooltip(`Year: ${year}<br>Theme: ${theme.Theme}<br>Location: ${theme.Where}<br>Contributions: ${contributions}`);
+    circle.bindTooltip(`Year: ${year}<br>Theme: ${theme.Theme}<br>Location: ${theme.Where}<br>General Chairs: ${theme["General Chairs"]}<br>Number of Contributions: ${contributions}`);
     circle.on('click', function() {
         window.open (yearUrl, '_blank'); 
     });
